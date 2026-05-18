@@ -3,7 +3,7 @@
  * 演示 queryHistoryKDataPlus、querySZ50Stocks、queryHS300Stocks、queryZZ500Stocks 的使用
  */
 
-import { login, queryHistoryKDataPlus, querySZ50Stocks, queryHS300Stocks, queryZZ500Stocks, logout } from "./mod.js";
+import { login, queryHistoryKDataPlus, querySZ50Stocks, queryHS300Stocks, queryZZ500Stocks, logout } from "./mod.ts";
 
 async function main() {
   // 先登录
