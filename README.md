@@ -114,6 +114,294 @@ if (result.errorCode === "0") {
 
 ---
 
+### `querySZ50Stocks(date?)`
+
+获取上证50成分股。
+
+**参数：**
+| 参数 | 类型 | 默认值 | 说明 |
+|------|------|--------|------|
+| date | `string` | `""` | 查询日期，格式 `"YYYY-MM-DD"`，可选。不传则查询最新数据 |
+
+**返回：** `Promise<ResultData>`
+
+**ResultData 属性：**
+| 属性 | 类型 | 说明 |
+|------|------|------|
+| errorCode | `string` | 错误码，`"0"` 表示成功 |
+| errorMsg | `string` | 错误信息 |
+| fields | `string[]` | 字段列表：`["updateDate", "code", "code_name"]` |
+| data | `Array<Array<string>>` | 原始数据（二维数组） |
+| date | `string` | 查询日期 |
+
+**示例：**
+```typescript
+import { login, logout, querySZ50Stocks } from "jsr:@littleyy/baostockjs";
+
+const lg = await login("anonymous", "123456");
+if (lg.errorCode === "0") {
+  const rs = await querySZ50Stocks();
+  if (rs.errorCode === "0") {
+    console.log(`获取到 ${rs.data.length} 条记录`);
+    const stocks = rs.getData();
+    stocks.forEach((stock) => {
+      console.log(`${stock.code} - ${stock.code_name}`);
+    });
+  }
+  await logout();
+}
+```
+
+---
+
+### `queryHS300Stocks(date?)`
+
+获取沪深300成分股。
+
+**参数：**
+| 参数 | 类型 | 默认值 | 说明 |
+|------|------|--------|------|
+| date | `string` | `""` | 查询日期，格式 `"YYYY-MM-DD"`，可选。不传则查询最新数据 |
+
+**返回：** `Promise<ResultData>`
+
+**ResultData 属性：**
+| 属性 | 类型 | 说明 |
+|------|------|------|
+| errorCode | `string` | 错误码，`"0"` 表示成功 |
+| errorMsg | `string` | 错误信息 |
+| fields | `string[]` | 字段列表：`["updateDate", "code", "code_name"]` |
+| data | `Array<Array<string>>` | 原始数据（二维数组） |
+| date | `string` | 查询日期 |
+
+**示例：**
+```typescript
+import { login, logout, queryHS300Stocks } from "jsr:@littleyy/baostockjs";
+
+const lg = await login("anonymous", "123456");
+if (lg.errorCode === "0") {
+  const rs = await queryHS300Stocks();
+  if (rs.errorCode === "0") {
+    console.log(`获取到 ${rs.data.length} 条记录`);
+    const stocks = rs.getData();
+    stocks.forEach((stock) => {
+      console.log(`${stock.code} - ${stock.code_name}`);
+    });
+  }
+  await logout();
+}
+```
+
+---
+
+### `queryZZ500Stocks(date?)`
+
+获取中证500成分股。
+
+**参数：**
+| 参数 | 类型 | 默认值 | 说明 |
+|------|------|--------|------|
+| date | `string` | `""` | 查询日期，格式 `"YYYY-MM-DD"`，可选。不传则查询最新数据 |
+
+**返回：** `Promise<ResultData>`
+
+**ResultData 属性：**
+| 属性 | 类型 | 说明 |
+|------|------|------|
+| errorCode | `string` | 错误码，`"0"` 表示成功 |
+| errorMsg | `string` | 错误信息 |
+| fields | `string[]` | 字段列表：`["updateDate", "code", "code_name"]` |
+| data | `Array<Array<string>>` | 原始数据（二维数组） |
+| date | `string` | 查询日期 |
+
+**示例：**
+```typescript
+import { login, logout, queryZZ500Stocks } from "jsr:@littleyy/baostockjs";
+
+const lg = await login("anonymous", "123456");
+if (lg.errorCode === "0") {
+  const rs = await queryZZ500Stocks();
+  if (rs.errorCode === "0") {
+    console.log(`获取到 ${rs.data.length} 条记录`);
+    const stocks = rs.getData();
+    stocks.forEach((stock) => {
+      console.log(`${stock.code} - ${stock.code_name}`);
+    });
+  }
+  await logout();
+}
+```
+
+---
+
+### `queryStockIndustry(code?, date?)`
+
+获取股票所属行业分类（申万行业分类）。
+
+**参数：**
+| 参数 | 类型 | 默认值 | 说明 |
+|------|------|--------|------|
+| code | `string` | `""` | 证券代码，格式如 `"sh.600000"`（9位），可选。不传则查询所有股票 |
+| date | `string` | `""` | 查询日期，格式 `"YYYY-MM-DD"`，可选。不传则查询最新数据 |
+
+**返回：** `Promise<ResultData>`
+
+**ResultData 属性：**
+| 属性 | 类型 | 说明 |
+|------|------|------|
+| errorCode | `string` | 错误码，`"0"` 表示成功 |
+| errorMsg | `string` | 错误信息 |
+| fields | `string[]` | 字段列表：`["updateDate", "code", "code_name", "industry", "industryClassification"]` |
+| data | `Array<Array<string>>` | 原始数据（二维数组） |
+| code | `string` | 查询的证券代码 |
+| date | `string` | 查询日期 |
+
+**返回字段说明：**
+| 字段名 | 说明 |
+|--------|------|
+| updateDate | 更新日期 |
+| code | 证券代码 |
+| code_name | 证券名称 |
+| industry | 所属行业 |
+| industryClassification | 行业分类（如 `"SW"` 申万） |
+
+**示例：**
+```typescript
+import { login, logout, queryStockIndustry } from "jsr:@littleyy/baostockjs";
+
+const lg = await login("anonymous", "123456");
+if (lg.errorCode === "0") {
+  // 查询浦发银行的行业分类
+  const rs = await queryStockIndustry("sh.600000");
+  if (rs.errorCode === "0") {
+    const data = rs.getData();
+    console.log(data[0].code_name, "所属行业:", data[0].industry);
+  }
+  await logout();
+}
+```
+
+---
+
+### `queryStockBasic(code?, codeName?)`
+
+获取证券基本资料。
+
+**参数：**
+| 参数 | 类型 | 默认值 | 说明 |
+|------|------|--------|------|
+| code | `string` | `""` | 证券代码，格式如 `"sh.600000"`（9位），可选 |
+| codeName | `string` | `""` | 证券名称，支持模糊查询，可选 |
+
+> 注意：`code` 和 `codeName` 至少需要提供一个。如果都提供，以 `code` 为准。
+
+**返回：** `Promise<ResultData>`
+
+**ResultData 属性：**
+| 属性 | 类型 | 说明 |
+|------|------|------|
+| errorCode | `string` | 错误码，`"0"` 表示成功 |
+| errorMsg | `string` | 错误信息 |
+| fields | `string[]` | 字段列表：`["code", "code_name", "ipoDate", "outDate", "type", "status"]` |
+| data | `Array<Array<string>>` | 原始数据（二维数组） |
+
+**返回字段说明：**
+| 字段名 | 说明 |
+|--------|------|
+| code | 证券代码 |
+| code_name | 证券名称 |
+| ipoDate | 上市日期 |
+| outDate | 退市日期 |
+| type | 证券类型：`1`=股票, `2`=指数, `3`=其它 |
+| status | 上市状态：`1`=上市, `0`=退市 |
+
+**示例：**
+```typescript
+import { login, logout, queryStockBasic } from "jsr:@littleyy/baostockjs";
+
+const lg = await login("anonymous", "123456");
+if (lg.errorCode === "0") {
+  // 按代码查询
+  const rs1 = await queryStockBasic("sh.600000");
+  if (rs1.errorCode === "0") {
+    const data = rs1.getData();
+    console.log(data[0].code_name, "上市日期:", data[0].ipoDate);
+  }
+
+  // 按名称模糊查询
+  const rs2 = await queryStockBasic("", "浦发银行");
+  if (rs2.errorCode === "0") {
+    console.log(`找到 ${rs2.data.length} 条记录`);
+  }
+  await logout();
+}
+```
+
+---
+
+### `queryPerformanceExpressReport(code, startDate?, endDate?)`
+
+获取季频公司业绩快报。
+
+**参数：**
+| 参数 | 类型 | 默认值 | 说明 |
+|------|------|--------|------|
+| code | `string` | 必填 | 证券代码，格式如 `"sh.600000"`（9位） |
+| startDate | `string` | `""` | 开始日期，格式 `"YYYY-MM-DD"`，可选 |
+| endDate | `string` | `""` | 结束日期，格式 `"YYYY-MM-DD"`，可选 |
+
+**返回：** `Promise<ResultData>`
+
+**ResultData 属性：**
+| 属性 | 类型 | 说明 |
+|------|------|------|
+| errorCode | `string` | 错误码，`"0"` 表示成功 |
+| errorMsg | `string` | 错误信息 |
+| fields | `string[]` | 字段列表 |
+| data | `Array<Array<string>>` | 原始数据（二维数组） |
+
+**返回字段说明：**
+| 字段名 | 说明 |
+|--------|------|
+| code | 证券代码 |
+| performanceExpPubDate | 业绩快报发布日期 |
+| performanceExpStatDate | 业绩快报统计日期 |
+| performanceExpUpdateDate | 业绩快报更新日期 |
+| performanceExpressTotalAsset | 总资产 |
+| performanceExpressNetAsset | 净资产 |
+| performanceExpressEPSChgPct | 每股收益增长率 |
+| performanceExpressROEWa | 加权平均净资产收益率 |
+| performanceExpressEPSDiluted | 稀释每股收益 |
+| performanceExpressGRYOY | 营业收入同比增长率 |
+| performanceExpressOPYOY | 营业利润同比增长率 |
+
+**示例：**
+```typescript
+import { login, logout, queryPerformanceExpressReport } from "jsr:@littleyy/baostockjs";
+
+const lg = await login("anonymous", "123456");
+if (lg.errorCode === "0") {
+  // 查询浦发银行2023年业绩快报
+  const rs = await queryPerformanceExpressReport(
+    "sh.600000",
+    "2023-01-01",
+    "2023-12-31"
+  );
+  if (rs.errorCode === "0") {
+    const data = rs.getData();
+    data.forEach((item) => {
+      console.log(
+        `${item.code} 统计日期:${item.performanceExpStatDate}`,
+        `每股收益增长率:${item.performanceExpressEPSChgPct}`
+      );
+    });
+  }
+  await logout();
+}
+```
+
+---
+
 ### `queryHistoryKDataPlus(code, fields, startDate, endDate, frequency, adjustflag)`
 
 查询历史K线数据。
@@ -192,12 +480,16 @@ baostockjs/
 ├── login/
 │   └── loginout.js              # 登录/登出功能
 ├── security/
-│   └── history.js               # 历史K线数据查询
+│   ├── history.js               # 历史K线数据查询
+│   ├── index_stocks.js          # 指数成分股查询（上证50、沪深300、中证500）
+│   ├── stock_industry.js        # 行业分类查询
+│   ├── stock_basic.js           # 证券基本资料查询
+│   └── performance_express.js   # 季频公司业绩快报查询
 ├── util/
 │   ├── socketutil.js            # TCP Socket 通信工具
 │   └── stringutil.js            # 字符串工具
 └── tests/
-    └── mod.js                   # 测试文件（8 个测试用例）
+    └── mod.js                   # 测试文件（26 个测试用例）
 ```
 
 ## 开发

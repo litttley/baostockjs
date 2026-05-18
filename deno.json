@@ -6,7 +6,7 @@
   
   "tasks": {
 
-  "dev":"deno run --allow-net baostockjs/main.js",
+  "dev":"deno run --allow-net ./main.js",
    "mod_test": "deno test   -A   ./tests/mod.js"
   },
   "imports": {
